@@ -1,0 +1,134 @@
+1
+HCCI engine exercise
+The HCCI (homogeneous charge compression ignition) engine has been subject of research for many years
+but as a pure engine concept it has mainly been of academic interest. However, the recent years, HCCI “like”
+combustion has been used in commercial vehicles too.
+In light to medium duty diesel engines it has become common practice to use a pre-injection, which is a
+small spray pulse injected early relative to the main pulse. With pre-injection, it has become possible to
+reduce the characteristic diesel noise. Substituting the intense premixed combustion phase from the main
+injection with a less intense HCCI like pilot combustion, enables a smoother transition to the mixing
+controlled combustion regime.
+In direct injected gasoline (GDI) engines it has become possible to increase the compression ratio by
+injecting later, just prior to the spark ignition. This actually causes a controlled and non-destructive amount
+of knocking to occur. It is a kind of HCCI combustion occurring in parts of the chamber, which is also
+recognized by the more knocking sound some GDI engines have.
+In above cases, the timing of heat release is partly controlled by injection timing and thus the level of
+homogeneity. Therefore it is more correct to call it PPCI (Partially Premixed Compression Ignition) rather
+than HCCI. In both cases it is of high importance to understand and control the engine acoustics.
+The HCCI principle in its more pure form is at its infancy of commercialization for part load conditions of SI
+engines. It reduces fuel consumption with about 15 %, but the technology is still expensive. One of the
+critical parts is the cylinder pressure sensor that is needed to control the combustion timing. These sensors
+are expensive and not very durable, thus not suited for commercial engines.
+In this year’s exercise, we will examine the transition from HCCI to PCCI with our direct injected HCCI test
+engine. This year we will use n-heptane as test fuel. We will investigate how performance is influenced by
+the transition from HCCI to PCCI and how this transition is effected by injection timing. We will also
+investigate the engine acoustics of the current setup.
+The HCCI test engine is a two cylinder BUKH diesel engine that has been modified to run in HCCI mode with
+one of the cylinders and CI mode on diesel with the other cylinder. This facilitates experiments with the HCCI
+cylinder as the diesel cylinder keeps the engine running even though the HCCI engine parameters are outside
+ignition range.
+Thomas will help you through the exercise. Your reports are supposed to contain a short description of the
+experimental setup, so keep eyes and ears open during the exercise.
+2
+Engine parameters will be varied according to the test matrices below.
+Engine parameters will be varied according to the test matrices below.
+
+Date       | Time   | Group | λ  | Speed [rpm]
+-----------|--------|-------|----|-------------
+11-03-2025 | 13-15  | 2     | 6  | 900
+11-03-2025 | 15-17  | 5     | 4  | 900
+18-03-2025 | 13-15  | 1     | 6  | 1200
+18-03-2025 | 15-17  | 4     | 4  | 1200
+25-03-2025 | 13-15  | 3     | 6  | 1700
+25-03-2025 | 15-17  | 6     | 4  | 1700
+
+Each group will carry out test series as described below:
+
+Test series | Injection timing [CAD BTDC]         | Air/fuel equivalence ratio [-]           | Intake pressure [bar]
+------------|--------------------------------------|------------------------------------------|-----------------------
+1           | No injection (motoring)              | No injection                             | 1.2
+2           | From 360 to -20                      | As table                                 | 1.2
+            | Jeppe knows the increments           |                                          |
+3           | No injection (motoring)              | No injection                             | 1.2
+4           | 80 CAD                               | Reduce λ in small steps until knocking   | 1.2
+
+The measurements from all groups will be shared on Inside to enable comparison of data obtained with
+different engine speeds.
+
+The assignment
+This assignment report should be very short and get to the point fast. This means that you skip abstract,
+introduction, and conclusion. It should only contain a very brief description of the experimental setup and
+results in terms of plots showing the effect of parameter variations. The only (but important) writing should
+be discussions of the trends you see in the plots. You should also attach your Matlab code in the appendix.
+An article/commercial by Mazda http://www.mazda.com/en/innovation/technology/skyactiv/skyactiv-g/
+illustrates the importance of understanding auto ignition, engine knock phenomena and the importance of
+residual gas. In our HCCI experiments the influence by residual gas is minimized by running experiments at
+very lean conditions. You can also find information about the latest development Skyactive-X on the web, for
+example https://insidemazda.mazdausa.com/the-mazda-way/technology/five-things-need-know-worlds-
+first-compression-ignition-engine/
+Specs:
+Engine: L = 0.160 [m], S = 0.085 [m], B = 0.085 [m], R = S/2 and CR = 18.5
+n-heptane: Hu = 44500 [kJ/kg] and AF ratio = 14.7 [kg/kg]
+Pickup: gain = 20 bar/V and resolution = 0.1 CAD
+Task 1: Investigate the effect on combustion timing during transition from HCCI to PCCI combustion mode
+
+
+Create six colored surface plots of HRR with CAD as x-axis and injection timing as y-axis, one plot for each
+lambda value and engine speed. The surface plots are good to play around with when you try to understand
+the combustion process, but usually it is best presented in a report when it is shown from the top as a 2D
+colored map (see slide 76 in “IC engine principles” from the lectures).
+Help: Pressure treatment is performed the same way as in the SI exercise but with few changes:
+• The resolution of the data is 0.1 CAD
+• It is a reasonable approximation to use γ = 1.35 for the heat release analysis.
+• To minimize the influence of blow-by and heat loss in the test engine it is an advantage to
+use a relative HRR to create the plots. The relative HRR is found by subtracting the motored
+HRR from the fired HRR.
+• Use the uploaded file fftBPfilter.m from programming exercise D to reduce electric noise and
+knocking in the pressure curves. Use the band pass filter as a low pass filter with cutting
+frequency set in the range of 1000 to 4000 Hz. It becomes a low pass filter if you specify a
+pass to go from 0 to the cutting frequency. It is usually good to use a large transition band
+width (also in the range of 1000 to 4000 Hz) to get a smooth cut.
+• For this engine it is a reasonable approximation to assume T = Tintake and p = pintake at -180
+CAD for the adjustment of the cylinder pressure and calculation of the in-cylinder bulk gas
+temperature. Use 1 CAD shift of TDC relative to the location of maximum pressure in the
+motoring.
+• An example script on how to make surface is uploaded as Surf_example.m.
+4
+Task 2: Investigate the effect on combustion efficiency during transition from HCCI to PCCI combustion
+mode
+Plot IMEP and indicated efficiency as function of injection timing. To minimize the effect of blow-by and heat
+loss you should use IMEP based on torque measurements (see the help). All three engine speeds should be
+shown in the same plot for each λ with well-chosen line styles and legends.
+Discuss what happens with the combustion process when the injection timing moves closer to TDC. What
+happens when engine speed and lambda is changed. Consider effects of homogeneity, temperature and
+crevice volumes. Note that combustion may occur in two separated steps, cool reactions (flame) where the
+fuel cracks into CO and H2, and a hot flame where the CO and H 2 burns. Use plots from both task 1 and task 2
+to support your understanding and explanations.
+Help:
+• IMEP should be determined by torque measurements in the current setup. This can be done
+by subtracting the torque of the diesel cylinder during motoring from the torque you
+measured when both cylinders where firing. Then you will get the indicated torque from the
+HCCI cylinder if the fuel supply to the diesel engine was unchanged.
+Task 3: Investigate the engine acoustics
+The engine piston used in the experiments have a bowl similar to traditional diesel engines (see slide 70 in
+“IC engine principles” lower left image), thus the geometry is rather complex for acoustic modeling.
+However, with a spectral analysis of the pressure oscillations it is possible to show quite good agreement
+with simple approximate models (as in programming exercise D). Use the knock tests made at each engine
+speeds. Carry out a spectral analysis of the knock for an interval of 10 CAD starting slightly after the heat
+release has peaked (typically around 50% heat release). Plot the spectrum and compare the measured
+frequencies with theoretically calculated resonance frequencies. Both use the bore of 85 mm and the bowl
+diameter of 41 mm to see if you can find the resonance frequencies.
+Help:
+• Use a single, representative pressure curve when you make spectral analysis of the knocking.
+• Subtract a low pass filtered pressure curve from the unfiltered curve to get a knock curve.
+Pick the 10 CAD interval to be analyzed from the knock curve.
+• Use the uploaded Matlab function FFTanalyze.m from programming exercise D to
+determine the spectrum of the knock.
+• The theory for calculating resonance frequencies based on cylinder bore and an estimated
+gas temperatures may be found in the article:
+http://www.lth.se/fileadmin/lth/student/Maskinteknik/Filer/Examensarbete/Lundin_Vressn
+er.pdf but use a 𝛾𝛾 = 1.29 for calculating the speed of sound in n-heptane combustion
+products.
+
+
+
